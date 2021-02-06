@@ -1,0 +1,49 @@
+
+form.form-example {
+	display: table;
+}
+
+div.form-example {
+	display: table-row;
+}
+
+label, input {
+	display: table-cell;
+	margin-bottom: 10px;
+}
+
+label {
+	padding-right: 10px;
+}
+
+*{
+
+}
+#wrapper {
+	margin: 0px auto;
+	width: 1200px; 
+	font-family: sans-serif;
+}
+h1 {
+	color: darkmagenta;
+}
+.form {
+	display: inline-block;
+	border: 5px solid black;
+	width: 500px;
+	text-align: center;
+	vertical-align: top;
+	margin: 25px;
+}
+input {
+	display: block;
+	margin-left: 175px;
+}
+.btn {
+	border:1px solid blue;
+	background:rgb(16, 118, 242);
+	color:white;
+	font-size: 13px;
+	padding: 5px; 
+	margin: 15px 0px 25px 215px; 
+}

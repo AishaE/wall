@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<title>User Page</title>
+</head>
+<body>
+	<div class="wrapper">
+		<h1>{{request.session.first_name}} {{request.session.last_name}} has logged in!</h1>
+			<a href="/logout">LOGOUT</a>
+
+		<div class="forms">
+			<h2>Post Your Message</h2>
+				{% if messages %}
+				<ul class="messages">    
+					{% for message in messages %}
+					<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+   			 		{% endfor %}
+				</ul>
+				{% endif %}
+				<form action="/create_message" method="POST">
+					{% csrf_token%}
+					<textarea name="content" id="" cols="40" rows="8"></textarea>
+					<input type="submit" value="Post A Message">
+				</form>
+				<div>
+					{% for message_obj in all_messages reversed %}
+					<div class="messages">
+						<p>Posted By: <a href="/user/{{message_obj.posted_by.id}}">{{ message_obj.posted_by.first_name}} {{ message_obj.posted_by.last_name}}</a></p>
+						{% if message_obj.posted_by.id == request.session.user_id %}
+						<a href="/delete_message/{{message_obj.id}}">Delete Message</a></p>
+						{% endif %}
+						<p>Posted on: {{ message_obj.created_at }}</p>
+						<p>{{ message_obj.content}}</p>
+						<p>Comments: </p>
+						{% if request.session.user_id != message_obj.posted_by.id %}
+						<form action="/create_comment/{{message_obj.id}}" method="POST">
+							{% csrf_token%}
+							<textarea name="comment" id="" cols="40" rows="8"></textarea>
+							<input type="submit" value="Post A Comment">
+						</form>
+						{% endif %}
+						{% for comment in message_obj.comment_message.all %}
+							<p>Comment: {{ comment.comment }}</p>
+							<p>Comment by: {{ comment.commented_by.first_name }}</p>
+						{% endfor %} 
+					</div>
+					<br>
+					{% endfor %}
+				</div>
+			</div>
+		<a href="">Back </a>
+    </div>
+</body>
+</html>
