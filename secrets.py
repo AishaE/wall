@@ -1,1 +1,1 @@
-SECRET_KEY = 'f^=*pu+(o!v^rah0vjo3#m(_cz0@!mzwwi-=jq5hx8^u)$c6i%'
+SECRET = 'f^=*pu+(o!v^rah0vjo3#m(_cz0@!mzwwi-=jq5hx8^u)$c6i%'
